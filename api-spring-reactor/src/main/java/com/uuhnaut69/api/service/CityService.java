@@ -11,7 +11,7 @@ public interface CityService {
 
 	Mono<City> findById(String id);
 
-	Mono<City> addCity(City city);
+	Mono<City> addCity(Mono<City> city);
 
 	Mono<Void> deleteCity(String id);
 

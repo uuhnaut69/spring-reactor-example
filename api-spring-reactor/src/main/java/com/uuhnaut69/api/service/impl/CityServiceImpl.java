@@ -29,8 +29,10 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public Mono<City> addCity(City city) {
-		return cityRepository.save(city);
+	public Mono<City> addCity(Mono<City> city) {
+		return city.flatMap(c -> {
+			return cityRepository.save(c);
+		});
 	}
 
 	@Override
