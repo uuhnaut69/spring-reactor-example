@@ -21,22 +21,24 @@ public class CityRequestHandler {
 
 	public Mono<ServerResponse> get(ServerRequest request) {
 		String id = request.pathVariable("id");
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(cityService.findById(id), City.class)
-				.switchIfEmpty(ServerResponse.notFound().build());
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON)
+				.body(cityService.findById(id), City.class).switchIfEmpty(ServerResponse.notFound().build());
 	}
 
 	public Mono<ServerResponse> getAll(ServerRequest request) {
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(cityService.findAll(), City.class)
-				.switchIfEmpty(ServerResponse.notFound().build());
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON)
+				.body(cityService.findAll(), City.class).switchIfEmpty(ServerResponse.notFound().build());
 	}
 
 	public Mono<ServerResponse> post(ServerRequest request) {
 		Mono<City> city = request.bodyToMono(City.class);
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(cityService.addCity(city), City.class);
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON).body(cityService.addCity(city),
+				City.class);
 	}
 
 	public Mono<ServerResponse> delete(ServerRequest request) {
 		String id = request.pathVariable("id");
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(cityService.deleteCity(id), Void.class);
+		return ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON).body(cityService.deleteCity(id),
+				Void.class);
 	}
 }
