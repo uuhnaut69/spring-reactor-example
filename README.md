@@ -45,6 +45,9 @@ Building non-blocking reactive applications on the JVM.
   
   - **Flux:** Returns 0…N elements. A Flux can be endless, meaning that it can keep emitting elements forever. Also it can return a sequence of elements and then send a completion notification when it has returned all of its elements.
   
+
+- **Back pressure:** Components control the number of events and how often they are emitted. In reactive terms, your component is referred to as the subscriber and events are emitted by a publisher. This is important because the subscriber is in control of how much data it receives and thus will not overburden itself.
+
 **Important note**
 
 To build a truly non-blocking application, we must aim to create/use all of it’s components as non-blocking i.e. client, controller, middle services and even the database. If one of them is blocking the requests, our aim will be defeated.
